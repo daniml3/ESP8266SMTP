@@ -119,6 +119,9 @@ bool ESP8266SMTPHelper::Send(const String &to, const String &message)
 	}
 
 	WiFiClientSecure client;
+        if (_client_insecure) {
+		client.setInsecure();
+	}
 
 #if defined(GS_SERIAL_LOG_LEVEL_2)
 	Serial.print(F("Connecting to: "));
@@ -261,6 +264,10 @@ bool ESP8266SMTPHelper::Send(const String &to, const String &message)
 		return false;
 	}
 	return true;
+}
+
+void ESP8266SMTPHelper::SetInsecure(bool insecure) {
+	_client_insecure = insecure;
 }
 
 ESP8266SMTPHelper SMTP;

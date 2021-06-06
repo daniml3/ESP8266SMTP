@@ -35,6 +35,7 @@ class ESP8266SMTPHelper
 		*_subject         = nullptr;
 	String _serverResponce;
 	bool AwaitSMTPResponse(WiFiClientSecure &client, const String &resp = "", uint16_t timeOut = 10000);
+	bool _client_insecure = false;
 
 	public:
 	ESP8266SMTPHelper() = default;
@@ -55,6 +56,7 @@ class ESP8266SMTPHelper
 	const char* getError();
 
 	bool Send(const String &to, const String &message);
+	void SetInsecure(bool insecure);
 };
 
 extern ESP8266SMTPHelper SMTP;
